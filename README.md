@@ -1,6 +1,36 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+Nikko Sadural
+
+## PID Control with Parameter Optimization
+
+Two PID controllers are implemented in this project. The first controller determines the steering control input from the crosstrack error. The second controller determines the throttle control input from the crosstrack error squared.
+
+A parameter optimization algorithm is applied during the error update. It takes one initial controller gain at a time and determines the optimal controller gain that minimizes the total error accumulated over a predefined time interval. Throughout the simulation, the controller gains converged to give acceptable performance around the race track.
+
+The following general process was used to determine initial controller gains through trial and error while using parameter optimization:
+
+1. Set Kp for steering controller.
+2. Set Kd for steering controller, such that Kp ~= 0.01*Kd and vehicle path is stable with little to no oscillations.
+3. Set Ki for steering controller much smaller than Kp and Kd, such that vehicle path is still stable and reaches center lane faster with few oscillations.
+4. Set Ki for throttle controller to 0.
+5. Set Kp and Kd for throttle controller, such that Kp ~= 0.10*Kd.
+
+After several rounds of tuning through trial and error, the following initial controller gains were selected:
+
+# Steering Controller
+Kp: 0.065
+Ki: 0.0000005
+Kd: 4.5
+
+# Throttle Controller
+Kp: 0.03
+Ki: 0.0
+Kd: 0.1
+
+The vehicle remains on the track for at least one lap. Further tuning of PID controller gains and parameter optimization algorithm factors could be explored for increasing speed and/or improving crosstrack error performance.
+
 ---
 
 ## Dependencies

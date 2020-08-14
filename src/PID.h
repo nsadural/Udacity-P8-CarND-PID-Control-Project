@@ -1,8 +1,18 @@
 #ifndef PID_H
 #define PID_H
 
+#include <iostream>
+#include <vector>
+#include <limits>
+#include <cstddef>
+#include <iostream>
+
 class PID {
  public:
+
+  int step;
+  int update_period;
+
   /**
    * Constructor
    */
@@ -29,7 +39,7 @@ class PID {
    * Calculate the total PID error.
    * @output The total PID error
    */
-  double TotalError();
+  double UpdateControl();
 
  private:
   /**
@@ -45,6 +55,23 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
+
+  /*
+  * Controller initialization
+  */
+  bool is_initialized;
+
+  /*
+  * Parameter optimization
+  */
+  int gain_index;
+  int select_case;
+  double current_error;
+  double total_error;
+  double best_error;
+  std::vector<double> K;
+  std::vector<double> dK;
+
 };
 
 #endif  // PID_H
